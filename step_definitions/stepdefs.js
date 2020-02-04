@@ -1,0 +1,30 @@
+const assert = require('assert')
+const { Given, When, Then } = require('cucumber')
+
+const isItFriday = today => {
+    if (today === "Friday") {
+        return 'TGIF'
+    } else {
+        return 'Nope'
+    }
+}
+
+Given('today is Sunday', () => {
+    this.today = 'Sunday'
+});
+
+Given('today is Friday', () => {
+    this.today = 'Friday'
+});
+
+When('I ask whether it\'s Friday yet', () => {
+    this.actualAnswer = isItFriday(this.today)
+});
+
+When('I ask whether it\'sFriday yet', () => {
+    this.actualAnswer = isItFriday(this.today)
+});
+
+Then('I should be told {string}', expectedAnswer => {
+    assert.equal(this.actualAnswer, expectedAnswer)
+});
